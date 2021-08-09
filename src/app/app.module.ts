@@ -5,16 +5,40 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { CourseListComponent } from './courses/course-list.component';
 import { StarComponent } from './stars/stars.component';
+import { ReplacePipe } from './pipe/replace.pipe';
+import { NavBarComponent } from './navbar/nav-bar.component';
+import { RouterModule } from '@angular/router';
+import { Error404Component } from './error-404/error-404.component';
+import { CourseInfoComponent } from './courses/course-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CourseListComponent,
-    StarComponent
+    StarComponent,
+    ReplacePipe,
+    NavBarComponent,
+    Error404Component,
+    CourseInfoComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot([
+
+      {
+        path: 'courses', component: CourseListComponent
+      },
+      {
+        path: 'courses/info/:id', component: CourseInfoComponent
+      },
+      {
+        path: '', redirectTo: 'courses', pathMatch: 'full' //Angular fornece duas rotas padrão: '', onde se encontra a rota raiz, ou '**', onde redireciona para uma rota que não existe.
+      },
+      {
+        path: '**', component: Error404Component
+      },
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
