@@ -27,7 +27,10 @@
             <td>{{ course.code | replace: '-': ' ' }}</td>
             <td>{{ course.releaseDate | date: 'dd/MM/yyyy' }}</td> <!-- Pipes date, lowercase padrões de angular. Também permite criar pipes personalizados -->
             <td><app-star [rating]='course.rating'></app-star></td>
-            <td><a [routerLink]="['/courses/info', course.id]" class="btn btn-primary">Edit</a></td>
+            <td>
+                <a [routerLink]="['/courses/info', course.id]" class="btn btn-primary" style="margin-right: 10px;">Edit</a>
+                <button (click)="deleteById(course.id)" class="btn btn-danger">Delete</button>
+            </td>
         </tr>
     </tbody>
 </table>
